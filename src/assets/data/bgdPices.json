@@ -1,0 +1,31 @@
+{
+  "allPics":{
+    "picList":[
+      {
+        "picId":"1001",
+        "picName":"1",
+        "picImage":"/static/img/picture/1.jpg"
+      },
+      {
+        "picId":"1002",
+        "picName":"2",
+        "picImage":"/static/img/picture/2.jpg"
+      },
+      {
+        "picId":"1003",
+        "picName":"3",
+        "picImage":"/static/img/picture/3.jpg"
+      },
+      {
+        "picId":"1004",
+        "picName":"4",
+        "picImage":"/static/img/picture/4.jpg"
+      },
+      {
+        "picId":"1005",
+        "picName":"5",
+        "picImage":"/static/img/picture/5.jpg"
+      }
+    ]
+  }
+}
