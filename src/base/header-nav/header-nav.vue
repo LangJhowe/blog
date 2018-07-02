@@ -21,6 +21,7 @@
 </script>
 
 <style scoped lang="stylus">
+@import "../../common/stylus/variable.styl"
 .nav-left{
   height 50px
   *{
@@ -29,13 +30,13 @@
   .logo{
     padding 0 20px
     line-height 50px
-    font-size 1.875em
+    font-size $font-size-large-x
     font-weight bolder
     font-family:'ChannelSlanted2';
   }
   .navbar{
     .nav-tab{
-      font-size 1.5625em
+      font-size $font-size-large-x
       line-height 50px
       padding 0 20px
     }

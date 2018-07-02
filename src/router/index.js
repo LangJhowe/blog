@@ -6,13 +6,13 @@ Vue.use(Router)
 
 export default new Router({
     routes:[
-        {
-            path: '/',
-            redirect: '/player'
-        },
-        {
-            path: '/player',
-            component: Player
-        }
+        // {
+        //     path: '/',
+        //     redirect: '/player'
+        // },
+        // {
+        //     path: '/player',
+        //     component: Player
+        // }
     ]
 })
