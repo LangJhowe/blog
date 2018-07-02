@@ -1,22 +1,12 @@
 <template>
   <div class="background" >
-    <transition-group name="bgd-slide">
-      <div
-        class="pic-wrap"
-        v-for="(pic,index) in bgdPicArr"
-        :key="pic.picId"
-        v-show="index === ActiveIdx"
-      >
-        <img
-          :src="pic.picImage"
-        />
-      </div>
-    </transition-group>
+    <background-pic v-show="index === ActiveIdx" v-for="(pic, index) in bgdPicArr" :key="index" :pic="pic"></background-pic>
     <div class="bgd-cover"></div>
   </div>
 </template>
 
 <script>
+import BackgroundPic from 'base/background-pic/background-pic'
 export default {
   props:{
     bgdPicArr:{
@@ -49,6 +39,9 @@ export default {
       this.ActiveIdx = (this.ActiveIdx + 1)%picArrLength;
       this.picSrc = this.bgdPicArr[this.ActiveIdx].picImage;
     },
+  },
+  components:{
+    BackgroundPic
   }
 }
 </script>
@@ -57,39 +50,16 @@ export default {
 .background{
   position absolute
   top 0
-  width 100%
-  height 100%
+  left 0
+  right 0
+  bottom 0
   z-index -50
-  .pic-wrap{
-    width 100%
-    height 100%
-    img{
-      position absolute
-      width 100%
-      height 100%
-    }
-  }
-  .bgd-slide-enter-active{
-    position absolute
-    transition-duration 2s
-    opacity 1
-  }
-  .bgd-slide-leave-active{
-    position absolute
-    transition-duration 2s
-    opacity 1
-  }
-  .bgd-slide-enter{
-    opacity 0
-  }
-  .bgd-slide-leave-to{
-    opacity 0
-  }
   .bgd-cover{
     position absolute
     top 0
-    width 100%
-    height 100%
+    left 0
+    right 0
+    bottom 0
     background-color rgba(0,0,0,.3)
   }
 }

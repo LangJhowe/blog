@@ -29,10 +29,10 @@ export default {
   },
   methods:{
     getLocalBgdPic(){
-      this.$http.get('/static/data/bgdPices.json').then(response =>{
-        const res = response.body;
+      this.$axios.get('/static/data/bgdPices.json').then(response =>{
+        const res = response.data;
         if(res){
-          this.bgdPicList = res.allPics.picList;
+          this.bgdPicList = res.bgdPicList;
         }
       },response =>{
         alert("请求本地图片失败")
@@ -43,7 +43,7 @@ export default {
 }
 </script>
 
-<style>
+<style lang="stylus" scoped>
 #app {
   position: absolute;
   top :0;

@@ -1,0 +1,24 @@
+{
+    "bgdPicList":[
+        {
+            "picName":"背景1",
+            "picUrl":"/static/img/picture/1.jpg"
+        },
+        {
+            "picName":"背景2",
+            "picUrl":"/static/img/picture/2.jpg"
+        },
+        {
+            "picName":"背景3",
+            "picUrl":"/static/img/picture/3.jpg"
+        },
+        {
+            "picName":"背景4",
+            "picUrl":"/static/img/picture/4.jpg"
+        },
+        {
+            "picName":"背景5",
+            "picUrl":"/static/img/picture/5.jpg"
+        }
+    ]
+}

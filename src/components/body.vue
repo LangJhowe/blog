@@ -1,23 +1,27 @@
 <template>
   <div class="body">
-    <PageMusic></PageMusic>
+    <div class="wrap">
+    </div>
   </div>
 </template>
 
 
 <script>
-  import PageMusic from '../components/page/musicPage'
 
   export default {
     components:{
-      PageMusic
     }
   }
 </script>
 
 <style scoped lang="stylus">
 .body{
-  margin-top 50px
-  width 100%
+  .wrap{
+    width 1200px
+    margin 0 auto
+  }
+}
+.s{
+  color: #fff
 }
 </style>

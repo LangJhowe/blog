@@ -25,7 +25,6 @@
   height 50px
   *{
     display inline-block
-    height 100%
   }
   .logo{
     padding 0 20px
@@ -35,7 +34,6 @@
     font-family:'ChannelSlanted2';
   }
   .navbar{
-    height 100%
     .nav-tab{
       font-size 1.5625em
       line-height 50px
