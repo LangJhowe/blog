@@ -2,7 +2,7 @@
   <div class="nav-left">
     <div class="logo">Jhowe</div>
     <div class="navbar">
-      <div class="nav-tab" v-for="tab in this.navTabsArr">{{tab}}</div>
+      <div class="nav-tab" v-for="(tab, index) in this.navTabsArr" :key="index">{{tab}}</div>
     </div>
   </div>
 </template>
