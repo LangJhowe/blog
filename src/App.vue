@@ -1,23 +1,23 @@
 <template>
   <div id="app">
     <Header></Header>
-    <Body></Body>
     <Background :bgdPicArr="bgdPicList"/>
+    <keep-alive>
+      <router-view></router-view>
+    </keep-alive>
   </div>
 </template>
 
 <script>
 
-import Background from './components/background'
-import Header from './components/header'
-import Body from './components/body'
+import Background from 'components/background/background'
+import Header from 'components/header/header'
 
 export default {
   name: 'App',
   components: {
     Background ,
-    Header,
-    Body
+    Header
   },
   data(){
     return{
@@ -44,7 +44,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "common/stylus/variable.styl"
 #app {
+  color: $color-theme
   position: absolute;
   top :0;
   right :0;
@@ -53,5 +55,6 @@ export default {
   width: 100%;
   height: 100%;
   font-size: 12px;
+  overflow: hidden;
 }
 </style>

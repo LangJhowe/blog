@@ -13,7 +13,7 @@
 
 
 <script>
-  import HeaderNav from './headerNav'
+import HeaderNav from 'base/header-nav/header-nav'
 export default {
   components:{
     HeaderNav
@@ -24,7 +24,6 @@ export default {
 <style scoped lang="stylus">
   .header{
     background-color rgba(0,0,0,.4)
-    color #fff
     .header-wrap{
       width 1200px
       margin 0 auto
