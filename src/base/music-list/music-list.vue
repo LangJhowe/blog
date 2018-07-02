@@ -1,17 +1,25 @@
 <template>
-    <div class="music-list">
+    <ul class="music-list">
         <music-item :isHeader="true"></music-item>
         
-        <music-item></music-item>
-    </div>
+        <music-item v-for="(song, index) in songList" :key="index" :song="song" :number="index + 1"></music-item>
+    </ul>
 </template>
 
 <script>
 import MusicItem from 'base/music-item/music-item'
 export default {
-    components:{
-        MusicItem
+  props:{
+    songList:{
+      type:Array,
+      default:[]
     }
+  },
+  computed:{
+  },
+  components:{
+    MusicItem
+  }
 }
 </script>
 

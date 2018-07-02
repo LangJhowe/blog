@@ -1,16 +1,21 @@
 <template>
-    <div class="music-item">
-       <ul class="list-header" v-if="isHeader">
-            <li class="list-header-name">歌曲</li>
-            <li class="list-header-singer">歌手</li>
-            <li class="list-header-time">时长</li>
-        </ul>
-        <ul class="music-info" v-if="!isHeader">
-            <li class="list-header-name">你好啊</li>
-            <li class="list-header-singer">jhowe</li>
-            <li class="list-header-time">2:00</li>
-        </ul>
-    </div>
+    <li class="music-item">
+        <div class="list-header" v-if="isHeader">
+          <i class="music-item-line" v-if="isHeader"></i>
+          <span class="list-name">歌曲</span>
+          <span class="list-singer">歌手</span>
+          <span class="list-time">时长</span>
+          <i class="music-item-line" v-if="isHeader"></i>
+        </div>
+
+        <div class="music-info" v-if="!isHeader">
+          <span class="list-number">{{number}}</span>
+          <span class="list-name">{{song.title}}</span>
+          <span class="list-singer">{{song.artist}}</span>
+          <span class="list-time">2:00</span>
+          <i class="music-item-line" v-if="!isHeader"></i>
+        </div>
+    </li>
 </template>
 
 <script>
@@ -19,6 +24,16 @@ export default {
         isHeader:{
             type:Boolean,
             default:false
+        },
+        song:{
+          type:Object,
+          default:function(){
+            return {}
+          }
+        },
+        number:{
+          type:Number,
+          default: 0
         }
     }
 }
@@ -27,19 +42,36 @@ export default {
 <style lang="stylus" scoped>
 .music-item{
     .list-header,.music-info{
+        padding-left 62px
+        padding-right 32px
         overflow hidden
-        li{
+        position relative
+        span{
             float left 
+            height 50px
+            line-height 50px
         }
-        .list-header-name{
+        .list-number{
+          position absolute
+          top 0
+          left 45px
+        }
+        .list-name{
             width 60%
         }
-        .list-header-singer{
+        .list-singer{
             width 30%
         }
-        .list-header-time{
+        .list-time{
             width 10%
         }
+    }
+    .music-info{
+    }
+    .music-item-line{
+      display block
+      height 1px
+      background-color rgba(255,255,255,.2)
     }
 }
 </style>
