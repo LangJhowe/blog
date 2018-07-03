@@ -14,7 +14,7 @@
 
 
 <script>
-import HeaderNav from 'base/header-nav/header-nav'
+import HeaderNav from 'components/header-nav/header-nav'
 export default {
   components:{
     HeaderNav

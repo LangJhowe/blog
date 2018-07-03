@@ -1,8 +1,8 @@
 <template>
-    <scroll class="music-list-scroll" :data="songList">
+    <scroll class="music-list-scroll" :data="songs">
       <ul class="music-list">
         <music-item :isHeader="true"></music-item>
-        <music-item v-for="(song, index) in songList" :key="index" :song="song" :number="index + 1"></music-item>
+        <music-item v-for="(song, index) in songs" :key="index" :song="song" :number="index + 1"></music-item>
       </ul>
     </scroll>
 </template>
@@ -12,10 +12,15 @@ import MusicItem from 'base/music-item/music-item'
 import Scroll from 'base/scroll/scroll'
 export default {
   props:{
-    songList:{
+    songs:{
       type:Array,
-      default:[]
+      default(){
+        return []
+      }
     }
+  },
+  created(){
+    console.log(this.songs)
   },
   computed:{
   },

@@ -3,13 +3,12 @@
         <transition name="normal">
             <div class="music-show">
                 <div class="music-header">
-                    <!-- <music-nav></music-nav> -->
-                    <switches :switches="switches"></switches>
+                    <switches :switches="switches" @switch="switchItem" :currentIndex="currentIndex"></switches>
                 </div>
                 <div class="main">
-                    <local-music v-if="true"></local-music>
-                    <recommend v-if="false"></recommend>
-                    <rank v-if="false"></rank >
+                    <local-music v-if="currentIndex === 0"></local-music>
+                    <recommend v-if="currentIndex === 1"></recommend>
+                    <rank v-if="currentIndex === 2"></rank >
                     <!-- <music-list class="music-list"></music-list>
                     <div class="current-music-info">
                         current-music
@@ -23,7 +22,6 @@
 
 <script>
 import MusicList from 'base/music-list/music-list'
-import MusicNav from 'components/music-nav/music-nav'
 import Switches from 'base/switches/switches'
 import LocalMusic from 'components/music-pages/local-music/local-music'
 import Recommend from 'components/music-pages/recommend/recommend'
@@ -33,12 +31,17 @@ import { mapGetters, mapMutations} from 'vuex'
 export default {
     data(){
         return {
-            switches:['本地歌单','推荐歌单','最新排行']
+            switches:['本地歌单','推荐歌单','最新排行'],
+            currentIndex: 0
         }
+    },
+    methods:{
+      switchItem(index){
+        this.currentIndex = index
+      }
     },
     components:{
         MusicList,
-        MusicNav,
         Switches,
         LocalMusic,
         Recommend,
