@@ -29,6 +29,7 @@ export default {
 <style lang="stylus" scoped>
 @import "../../common/stylus/variable.styl"
 .music-list-scroll{
+    position relative
     height 500px
     overflow hidden
 }

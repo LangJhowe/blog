@@ -54,6 +54,10 @@ export default {
                     speed: 20,
                     invert: false,
                     easeTime: 300
+                },
+                scrollbar: {
+                    fade: true,
+                    interactive: true // 1.8.0 新增
                 }
             })
 

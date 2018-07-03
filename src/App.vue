@@ -2,7 +2,6 @@
   <div id="app">
     <Header></Header>
     <Background :bgdPicArr="bgdPicList"/>
-    <player></player>
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
@@ -13,14 +12,12 @@
 
 import Background from 'components/background/background'
 import Header from 'components/header/header'
-import Player from 'components/player/player'
 
 export default {
   name: 'App',
   components: {
     Background ,
-    Header,
-    Player
+    Header
   },
   data(){
     return{

@@ -41,7 +41,9 @@ export default {
         duration(){
             let time = this.song.duration
             let min = Math.floor(time / 60)
-            let second = time % 60 < 10 ? "0" + time % 60:time % 60
+            let second = time % 60
+            min = min < 10 ? "0" + min : min
+            second = second < 10 ? "0" + second : second
             return min + ":" + second
         }
     },

@@ -1,49 +1,36 @@
 <template>
-  <div class="nav-left">
-    <div class="logo">Jhowe</div>
     <div class="navbar">
-      <div class="nav-tab" v-for="(tab, index) in this.navTabsArr" :key="index">{{tab}}</div>
+      <router-link tag="div" :to="`/${navName}`">
+        <div class="nav-tab" v-html="navName"></div>
+      </router-link>
     </div>
-  </div>
 </template>
 
 <script>
   export default {
-    data(){
-      return{
-        navTabsArr:[
-          "Home","Music","Todo",
-        ]
-
+    props:{
+      navName:{
+        type:String,
+        default:''
       }
-    }
+    },
   }
 </script>
 
 <style scoped lang="stylus">
 @import "../../common/stylus/variable.styl"
-.nav-left{
-  height 50px
-  *{
-    display inline-block
-  }
-  .logo{
-    padding 0 20px
-    line-height 50px
-    font-size $font-size-large-x
-    font-weight bolder
-    font-family:'ChannelSlanted2';
-  }
-  .navbar{
+.navbar{
     .nav-tab{
       font-size $font-size-large-x
       line-height 50px
       padding 0 20px
+      border-radius 5px
+      transition-duration 200ms
     }
     .nav-tab:hover{
       transform translate(-1px,-2px)
       background-color rgba(256,256,256,.3)
+      box-shadow 1px 2px 5px rgba(256,256,256,1)
     }
-  }
 }
 </style>
