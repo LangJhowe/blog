@@ -1,13 +1,15 @@
 <template>
-    <ul class="music-list">
+    <scroll class="music-list-scroll" :data="songList">
+      <ul class="music-list">
         <music-item :isHeader="true"></music-item>
-        
         <music-item v-for="(song, index) in songList" :key="index" :song="song" :number="index + 1"></music-item>
-    </ul>
+      </ul>
+    </scroll>
 </template>
 
 <script>
 import MusicItem from 'base/music-item/music-item'
+import Scroll from 'base/scroll/scroll'
 export default {
   props:{
     songList:{
@@ -18,13 +20,16 @@ export default {
   computed:{
   },
   components:{
-    MusicItem
+    MusicItem,
+    Scroll
   }
 }
 </script>
 
 <style lang="stylus" scoped>
-.music-list{
-    
+@import "../../common/stylus/variable.styl"
+.music-list-scroll{
+    height 500px
+    overflow hidden
 }
 </style>

@@ -24,6 +24,7 @@ export default {
   mounted(){
     setInterval(()=>{     //不能常规的，建议使用箭头函数
       this.changeBgdPic()
+      console.log('s')
     },10000)
     //或
     // setInterval(this.changeBgdPic,2000)
