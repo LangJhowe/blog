@@ -5,6 +5,7 @@
     <keep-alive>
       <router-view></router-view>
     </keep-alive>
+    <player></player>
   </div>
 </template>
 
@@ -12,12 +13,14 @@
 
 import Background from 'components/background/background'
 import Header from 'components/header/header'
+import Player from 'components/player/player'
 
 export default {
   name: 'App',
   components: {
     Background ,
-    Header
+    Header,
+    Player
   },
   data(){
     return{

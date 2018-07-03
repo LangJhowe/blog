@@ -19,7 +19,7 @@ export default new Router({
         },
         {
             path: '/music',
-            component: Music
+            component: Music,
         },
         {
             path: '/todo',
