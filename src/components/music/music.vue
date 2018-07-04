@@ -6,9 +6,9 @@
                     <switches :switches="switches" @switch="switchItem" :currentIndex="currentIndex"></switches>
                 </div>
                 <div class="main">
-                    <local-music v-if="currentIndex === 0"></local-music>
-                    <recommend v-if="currentIndex === 1"></recommend>
-                    <rank v-if="currentIndex === 2"></rank >
+                    <local-music v-show="currentIndex === 0"></local-music>
+                    <recommend v-show="currentIndex === 1"></recommend>
+                    <rank v-show="currentIndex === 2"></rank >
                     <!-- <music-list class="music-list"></music-list>
                     <div class="current-music-info">
                         current-music
@@ -16,7 +16,9 @@
                 </div>
             </div>
         </transition>
-        
+        <div class="music-cover">
+            <img :src="currentSong.image" alt="">
+        </div>
     </div>
 </template>
 
@@ -35,10 +37,18 @@ export default {
             currentIndex: 0
         }
     },
+    created(){
+    },
+    computed:{
+        ...mapGetters([
+            'currentSong'
+        ])
+    },
     methods:{
       switchItem(index){
         this.currentIndex = index
-      }
+      },
+      
     },
     components:{
         MusicList,
@@ -72,6 +82,20 @@ export default {
           }  
         }
     }
-    
+    .music-cover{
+        img{
+            position fixed
+            top 0 
+            left 0
+            z-index -30
+            -webkit-filter blur(15px)
+            -moz-filter blur(15px)
+            -o-filter blur(15px)
+            -ms-filter blur(15px)
+            filter blur(15px)
+            width 100%
+            height 100%
+        }
+    }
 }
 </style>

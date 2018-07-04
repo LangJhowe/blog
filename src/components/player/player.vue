@@ -7,8 +7,8 @@
                         <div class="prev">
                             <i class="icon prev-icon"></i>
                         </div>
-                        <div class="togglePlaying">
-                            <i class="icon playing-icon"></i>
+                        <div class="togglePlaying" @click="togglePlaying">
+                            <i class="icon" :class="playIcon"></i>
                         </div>
                         <div class="next">
                             <i class="icon next-icon"></i>
@@ -17,8 +17,8 @@
                     <div class="progress">
                         <div class="progress-wrapper">
                             <div class="current-song">
-                                <span class="song-info">currentSong.name - currentSong.singer</span>
-                                <span class="song-time">02:00 / formatDuration</span>
+                                <span class="song-info" v-html="currentSong.name+ ' - ' + currentSong.singer"></span>
+                                <span class="song-time">{{format(currentTime)}} / {{format(currentSong.duration)}}</span>
                             </div>
                             <div class="xx">xxx
 
@@ -34,6 +34,7 @@
             <img src="" alt="">
           </div>
         </transition>
+        <audio ref="audio" :src="currentSong.url" @play="ready" @error="error" @timeupdate="updateTime" @ended="end" ></audio>
     </div>
 </template>
 
@@ -42,6 +43,84 @@ import { mapGetters, mapMutations} from 'vuex'
 import {getSongVkey} from 'api/song.js'
 import {ERR_OK} from 'api/config.js'
 export default {
+    data(){
+        return {
+            songReady:false,
+            currentTime: 0,
+            currentLyric: null,
+            currentLinenNum: 0,
+            curretnShow: 'cd',
+            playingLyric: '',
+            noLyricText: ''
+        }
+    },
+    computed:{
+        playIcon(){
+            return this.playing ? 'pause-icon' : 'playing-icon'
+        },
+        ...mapGetters([
+            'currentIndex',
+            'play',
+            'sequenceList',
+            'playlist',
+            'currentSong',
+            'mode',
+            'playing'
+        ])
+    },
+    methods:{
+        ready() {
+            this.songReady = true
+        },
+        togglePlaying(){
+            if(!this.songReady){
+                return
+            }
+            this.setPlayState(!this.playing)
+        },
+        error(){
+
+        },
+        updateTime(e){
+            this.currentTime = e.target.currentTime
+        },
+        end(){
+
+        },
+        format(time){
+            if(!time){
+                return '00:00'
+            }
+            let min = Math.floor( time / 60)
+            let second = (time % 60).toFixed(0)
+            min = min < 10 ? "0" + min : min
+            second = second < 10 ? "0" + second : second
+            return min + ":" + second
+        },
+        ...mapMutations({
+            setPlayState:'SET_PLAYING_STATE'
+        })
+    },
+    watch:{
+        currentSong(newSong, oldSong){
+            if(!newSong.id){
+                reuturn
+            }
+            if(newSong.id === oldSong.id){
+                return
+            }
+            clearTimeout(this.timer)
+            this.timer = setTimeout(()=>{
+                this.$refs.audio.play()
+            },1000)
+        },
+        playing(newPlaying) {
+            this.$nextTick(() => {
+                const audio = this.$refs.audio
+                newPlaying ? audio.play() : audio.pause()
+            })
+        }
+    }
 }
 </script>
 
@@ -67,7 +146,6 @@ export default {
             }
             .operator{
                 width 25%
-                background-color $test-color-1
                 .prev,.togglePlaying,.next{
                     display flex
                     align-items center
