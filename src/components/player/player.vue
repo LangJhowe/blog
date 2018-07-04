@@ -20,8 +20,8 @@
                                 <span class="song-info" v-html="currentSong.name+ ' - ' + currentSong.singer"></span>
                                 <span class="song-time">{{format(currentTime)}} / {{format(currentSong.duration)}}</span>
                             </div>
-                            <div class="xx">xxx
-
+                            <div class="xx">
+                                <progress-bar :percent="percent" @percentChange="onProgressBarChange"></progress-bar>
                             </div>
                         </div>
                     </div>
@@ -29,16 +29,12 @@
                 </div>
             </div>
         </transition>
-        <transition name="opacity">
-          <div class="player-cover">
-            <img src="" alt="">
-          </div>
-        </transition>
         <audio ref="audio" :src="currentSong.url" @play="ready" @error="error" @timeupdate="updateTime" @ended="end" ></audio>
     </div>
 </template>
 
 <script>
+import ProgressBar from 'base/progress-bar/progress-bar'
 import { mapGetters, mapMutations} from 'vuex'
 import {getSongVkey} from 'api/song.js'
 import {ERR_OK} from 'api/config.js'
@@ -59,6 +55,9 @@ export default {
         playIcon(){
             return this.playing ? 'pause-icon' : 'playing-icon'
         },
+        percent() {
+            return this.currentTime / this.currentSong.duration
+        },
         ...mapGetters([
             'currentIndex',
             'play',
@@ -78,6 +77,14 @@ export default {
                 return
             }
             this.setPlayState(!this.playing)
+        },
+        onProgressBarChange(percent) {
+            const currentTime = this.currentSong.duration * percent
+            // 注意template中的是onProgressBarChange 不是 onProgressBarChange(percent)否则拖动会回退
+            this.$refs.audio.currentTime = this.currentSong.duration * percent
+            if (!this.playing) {
+                this.togglePlaying()
+            }
         },
         error(){
 
@@ -150,6 +157,9 @@ export default {
             setCurrentIndex:'SET_CURRENT_INDEX'
         })
     },
+    components:{
+        ProgressBar
+    },
     watch:{
         currentSong(newSong, oldSong){
             if(!newSong.id){
@@ -208,10 +218,13 @@ export default {
                 width 50%
                 background-color $test-color-2
                 font-size $font-size-medium-x
+                position relative
                 .progress-wrapper{
                     width 100%
                     .current-song{
-                        display block
+                        position absolute
+                        width 100%
+                        top 20px
                         .song-info{
 
                         }

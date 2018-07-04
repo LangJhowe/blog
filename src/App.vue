@@ -50,14 +50,7 @@ export default {
 @import "common/stylus/variable.styl"
 #app {
   color: $color-theme
-  position: absolute;
-  top :0;
-  right :0;
-  left :0;
-  bottom :0;
-  width: 100%;
-  height: 100%;
-  font-size: 12px;
+  font-size: $font-size-medium;
   overflow: hidden;
 }
 </style>

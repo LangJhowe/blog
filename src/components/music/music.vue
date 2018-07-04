@@ -87,12 +87,13 @@ export default {
             position fixed
             top 0 
             left 0
+            transform scale(1.5)
             z-index -30
-            -webkit-filter blur(15px)
-            -moz-filter blur(15px)
-            -o-filter blur(15px)
-            -ms-filter blur(15px)
-            filter blur(15px)
+            -webkit-filter blur(50px)
+            -moz-filter blur(50px)
+            -o-filter blur(50px)
+            -ms-filter blur(50px)
+            filter blur(50px)
             width 100%
             height 100%
         }
