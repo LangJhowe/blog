@@ -4,13 +4,13 @@
             <div class="wrapper">
                 <div class="player-ctrl">
                     <div class="operator">
-                        <div class="prev">
+                        <div class="prev" @click="prev">
                             <i class="icon prev-icon"></i>
                         </div>
                         <div class="togglePlaying" @click="togglePlaying">
                             <i class="icon" :class="playIcon"></i>
                         </div>
-                        <div class="next">
+                        <div class="next" @click="next">
                             <i class="icon next-icon"></i>
                         </div>
                     </div>
@@ -42,6 +42,7 @@
 import { mapGetters, mapMutations} from 'vuex'
 import {getSongVkey} from 'api/song.js'
 import {ERR_OK} from 'api/config.js'
+import {playMode} from 'common/js/config'
 export default {
     data(){
         return {
@@ -85,7 +86,54 @@ export default {
             this.currentTime = e.target.currentTime
         },
         end(){
-
+            if (this.mode === playMode.loop) {
+                this.loop()
+             } else {
+                this.next()
+             }
+        },
+        prev() {
+            if (!this.songReady) {
+                return
+            }
+            if (this.playlist.length === 1) {
+                // 当歌单只有一首歌的时候
+                // currentSong不会改变也不会执行watch里的内容
+                this.loop()
+            } else {
+                let index = this.currentIndex - 1
+                if (index === -1) {
+                    index = this.playlist.length - 1
+                }
+                 this.setCurrentIndex(index)
+                // 播放时 切换歌曲 同时改变playing状态 开始
+                if (!this.playing) {
+                    this.togglePlaying()
+                }
+                // 播放时 切换歌曲 同时改变playing状态 结束
+            }
+            this.songReady = false
+        },
+        next() {
+            if (!this.songReady) {
+                return
+            }
+            if (this.playlist.length === 1) {
+                // 当歌单只有一首歌的时候
+                // currentSong不会改变也不会执行watch里的内容
+                this.loop()
+                return // 当列表只有一首歌的时候 切歌 那么control都会disable
+            } else {
+                let index = this.currentIndex + 1
+                if (index === this.playlist.length) {
+                    index = 0
+                }
+                this.setCurrentIndex(index)
+                if (!this.playing) {
+                    this.togglePlaying()
+                }
+            }
+            this.songReady = false
         },
         format(time){
             if(!time){
@@ -98,7 +146,8 @@ export default {
             return min + ":" + second
         },
         ...mapMutations({
-            setPlayState:'SET_PLAYING_STATE'
+            setPlayState:'SET_PLAYING_STATE',
+            setCurrentIndex:'SET_CURRENT_INDEX'
         })
     },
     watch:{

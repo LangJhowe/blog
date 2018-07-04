@@ -78,8 +78,9 @@ export default {
         }
         .number{
           position absolute
+          text-align right
           top 0
-          left 45px
+          left 40px
         }
         .name{
             width 60%
